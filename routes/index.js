@@ -52,7 +52,7 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
     body: JSON.stringify(payload)
   }).then((resp) => {
     console.log(resp.status);
-    if (resp.status.charAt(0) !== 2) return res.sendStatus(503);
+    if (resp.status.toString()[0] !== 2) return res.sendStatus(503);
 
     resp.json().then((data) => {
       res.status(200).json(data);
