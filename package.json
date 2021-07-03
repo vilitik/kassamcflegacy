@@ -4,7 +4,8 @@
   "description": "An Express-based application skeleton",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js localhost 8080"
+    "start": "node .",
+    "dev": "nodemon app.js localhost 8080"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
