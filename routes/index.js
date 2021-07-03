@@ -56,14 +56,10 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
 
     resp.json().then((data) => {
       console.log(data);
-      console.log(data.data);
-      console.log(data.data.id);
-      console.log(data.data.payments);
-      console.log(data.payments);
       res.status(200).json(data);
 
       fetch(
-        `${mcfInfo.addr}/v0/orders/${data.data.id}/payments/${data.payments.id}/mark-as-paid`,
+        `${mcfInfo.addr}/v0/orders/${data.data.id}/payments/${data.data.payments[0].id}/mark-as-paid`,
         {
           method: "POST",
           headers: {
