@@ -56,7 +56,7 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
     resp.json().then((data) => {
       res.status(200).json(data);
 
-      fetch(`${mcfInfo.addr}/v0/orders/${data.id}/quick-process`, {
+      fetch(`${mcfInfo.addr}/v1/orders/${data.id}/quick-process`, {
         method: "POST",
         headers: {
           Accept: "*/*",
