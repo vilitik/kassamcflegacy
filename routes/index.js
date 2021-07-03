@@ -51,7 +51,8 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
     },
     body: JSON.stringify(payload)
   }).then((resp) => {
-    if (resp.status !== 200) return res.sendStatus(501);
+    console.log(resp.status);
+    if (resp.status !== 200) return res.sendStatus(503);
 
     resp.json().then((data) => {
       res.status(200).json(data);
