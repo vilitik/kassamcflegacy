@@ -55,6 +55,7 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
     //if (resp.state !== 201) return res.sendStatus(503);
 
     resp.json().then((data) => {
+      console.log(data);
       res.status(200).json(data);
 
       fetch(
