@@ -55,6 +55,18 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
 
     resp.json().then((data) => {
       res.status(200).json(data);
+
+      fetch(`${mcfInfo.addr}/v0/orders/${data.id}/quick-process`, {
+        method: "POST",
+        headers: {
+          Accept: "*/*",
+          Authorization:
+            "Basic " +
+            Buffer.from(`${mcfInfo.user}:${mcfInfo.password}`).toString(
+              "base64"
+            )
+        }
+      });
     });
   });
 
