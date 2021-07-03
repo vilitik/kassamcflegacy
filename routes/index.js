@@ -34,6 +34,30 @@ router.post("/products", function (req, res, next) {
   //res.sendStatus(500);
 });
 
+router.post("/campaigns", function (req, res, next) {
+  console.log("------");
+  console.log(req.body);
+  const mcfInfo = req.body.mcfInfo;
+  if (!mcfInfo) return res.sendStatus(401);
+
+  fetch(`${mcfInfo.addr}/v0/campaigns?expand=prices&page_size=999999`, {
+    headers: {
+      Accept: "*/*",
+      Authorization:
+        "Basic " +
+        Buffer.from(`${mcfInfo.user}:${mcfInfo.password}`).toString("base64")
+    }
+  }).then((resp) => {
+    if (resp.status !== 200) return res.sendStatus(501);
+
+    resp.json().then((data) => {
+      res.status(200).json(data.data);
+    });
+  });
+
+  //res.sendStatus(500);
+});
+
 router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
   console.log("------");
   console.log(req.body);
