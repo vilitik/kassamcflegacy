@@ -14,7 +14,7 @@ router.post("/products", function (req, res, next) {
   if (!mcfInfo) return res.sendStatus(401);
 
   fetch(
-    `${mcfInfo.addr}/v1/products?expand=stock_item,variations,variations.stock_item&page_size=999999`,
+    `${mcfInfo.addr}/v1/products?expand=image_links,stock_item,variations,variations.stock_item&page_size=999999`,
     {
       headers: {
         Accept: "*/*",
