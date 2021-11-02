@@ -58,7 +58,7 @@ router.post("/campaigns", function (req, res, next) {
   //res.sendStatus(500);
 });
 
-router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
+router.post("/newLegacyOrderBookkeeping", async function (req, res, next) {
   console.log("------");
   console.log(req.body);
   const mcfInfo = req.body.mcfInfo;
@@ -66,7 +66,7 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
   if (!mcfInfo || !payload) return res.sendStatus(401);
   console.log(JSON.stringify(payload));
 
-  fetch(`${mcfInfo.addr}/v0/orders?expand=tax_summary`, {
+  fetch(`${mcfInfo.addr}/v0/orders`, {
     method: "POST",
     headers: {
       Accept: "*/*",
@@ -81,7 +81,24 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
 
     resp.json().then((data) => {
       console.log(data);
-      res.status(200).json(data);
+
+      const fulldatar = await fetch(
+        `${mcfInfo.addr}/v0/orders/${data.data.id}?expand=tax_summary`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "*/*",
+            Authorization:
+              "Basic " +
+              Buffer.from(`${mcfInfo.user}:${mcfInfo.password}`).toString(
+                "base64"
+              )
+          }
+        }
+      )
+      const fulldata = await fulldatar.json()
+
+      res.status(200).json({...data, pwrk_tax_summary: fulldata.tax_summary });
 
       fetch(
         `${mcfInfo.addr}/v0/orders/${data.data.id}/payments/${data.data.payments[0].id}/mark-as-paid`,
