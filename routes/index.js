@@ -98,8 +98,8 @@ router.post("/newLegacyOrderBookkeeping", async function (req, res, next) {
       ).then((resp)=> {
         resp.json().then((datad) => {
 
-        console.log(datad)
-          res.status(200).json({...data, pwrk_tax_summary: datad.tax_summary });
+        console.log('datad: ' + datad.tax_summary)
+          res.status(200).json({...data, pwrk_tax_summary: datad.tax_summary, pwrk_has_custom_fields: true });
 
       fetch(
         `${mcfInfo.addr}/v0/orders/${data.data.id}/payments/${data.data.payments[0].id}/mark-as-paid`,
