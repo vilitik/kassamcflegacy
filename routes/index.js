@@ -75,7 +75,7 @@ router.post("/newLegacyOrderBookkeeping", async function (req, res, next) {
         Buffer.from(`${mcfInfo.user}:${mcfInfo.password}`).toString("base64")
     },
     body: JSON.stringify(payload)
-  }).then((resp) => {
+  }).then(async (resp) => {
     console.log(resp.status);
     //if (resp.state !== 201) return res.sendStatus(503);
 
