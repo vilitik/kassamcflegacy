@@ -82,10 +82,10 @@ router.post("/newLegacyOrderBookkeeping", async function (req, res, next) {
     resp.json().then((data) => {
       console.log(data);
 
-      const fulldatar = await fetch(
+      fetch(
         `${mcfInfo.addr}/v0/orders/${data.data.id}?expand=tax_summary`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "*/*",
             Authorization:
@@ -95,10 +95,11 @@ router.post("/newLegacyOrderBookkeeping", async function (req, res, next) {
               )
           }
         }
-      )
-      const fulldata = await fulldatar.json()
+      ).then((resp)=> {
+        resp.json().then((datad) => {
 
-      res.status(200).json({...data, pwrk_tax_summary: fulldata.tax_summary });
+        console.log(datad)
+          res.status(200).json({...data, pwrk_tax_summary: datad.tax_summary });
 
       fetch(
         `${mcfInfo.addr}/v0/orders/${data.data.id}/payments/${data.data.payments[0].id}/mark-as-paid`,
@@ -126,6 +127,12 @@ router.post("/newLegacyOrderBookkeeping", async function (req, res, next) {
           }
         });
       });
+
+
+        })
+      })
+
+      
     });
   });
 
