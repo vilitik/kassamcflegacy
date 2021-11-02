@@ -66,7 +66,7 @@ router.post("/newLegacyOrderBookkeeping", function (req, res, next) {
   if (!mcfInfo || !payload) return res.sendStatus(401);
   console.log(JSON.stringify(payload));
 
-  fetch(`${mcfInfo.addr}/v0/orders`, {
+  fetch(`${mcfInfo.addr}/v0/orders?expand=tax_summary`, {
     method: "POST",
     headers: {
       Accept: "*/*",
