@@ -4,10 +4,12 @@ var router = express.Router();
 
 router.post("/:product_code",function (req,res,next) {
     const mcfInfo = req.body.mcfInfo;
-    let body = null
+    let body = {}
     if (!mcfInfo) return res.sendStatus(401);
-    if(req.body.doChanges) {
+    if(req.body.doChanges && req.body.quantity) {
         body.quantity = req.body.quantity
+    } else {
+        body = null
     }
   
     fetch(
