@@ -5,9 +5,12 @@ var router = express.Router();
 router.post("/:product_code",function (req,res,next) {
     const mcfInfo = req.body.mcfInfo;
     let body = {}
+    let method = 'GET'
     if (!mcfInfo) return res.sendStatus(401);
     if(req.body.doChanges && req.body.quantity) {
         body.quantity = req.body.quantity
+        method = 'PATCH'
+        body = JSON.stringify(body)
     } else {
         body = null
     }
@@ -15,7 +18,7 @@ router.post("/:product_code",function (req,res,next) {
     fetch(
     `${mcfInfo.addr}/v1/stock/${req.params.product_code}`,
         {
-            method: typeof body == 'object' ? 'PATCH' : 'GET',
+            method,
             headers: {
                 Accept: "*/*",
                 Authorization:
