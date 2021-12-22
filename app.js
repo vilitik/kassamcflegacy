@@ -5,6 +5,7 @@ var logger = require("morgan");
 var cors = require("cors");
 
 var indexRouter = require("./routes/index");
+var smRouter = require("./routes/sm/index");
 
 var app = express();
 
@@ -20,6 +21,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+
+app.use("/saldomuutos", smRouter);
 
 var listener = app.listen(8080, function () {
   console.log("Listening on port " + listener.address().port);
