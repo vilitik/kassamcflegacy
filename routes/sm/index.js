@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 var express = require("express");
 var router = express.Router();
 
-router.get("/:product_id/:variation_id",function (req,res,next) {
+router.post("/:product_id/:variation_id",function (req,res,next) {
     const mcfInfo = req.body.mcfInfo;
     if (!mcfInfo) return res.sendStatus(401);
 
