@@ -15,7 +15,7 @@ router.post("/:product_code",function (req,res,next) {
     fetch(
     `${mcfInfo.addr}/v1/stock/${req.params.product_code}`,
         {
-            method: typeof body == 'objcet' ? 'PATCH' : 'GET',
+            method: typeof body == 'object' ? 'PATCH' : 'GET',
             headers: {
                 Accept: "*/*",
                 Authorization:
