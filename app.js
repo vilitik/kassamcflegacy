@@ -6,6 +6,7 @@ var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var smRouter = require("./routes/sm/index");
+var llRouter = require("./routes/ll/index");
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 
 app.use("/saldomuutos", smRouter);
+app.use("/legacyloyalty", llRouter);
 
 var listener = app.listen(8080, function () {
   console.log("Listening on port " + listener.address().port);
