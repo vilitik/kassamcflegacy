@@ -27,7 +27,7 @@ router.post("/products", function (req, res, next) {
     console.log(Buffer.from(`${mcfInfo.user}:${mcfInfo.password}`).toString("base64"))
     if (!resp) return res.sendStatus(500);
 
-    resp.text().then((data) => {
+    resp.json().then((data) => {
       console.log(data)
       if (resp.status !== 200) return res.sendStatus(501);
       res.status(200).json(data.data);
