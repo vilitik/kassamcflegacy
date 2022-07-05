@@ -25,9 +25,8 @@ router.post("/products", function (req, res, next) {
     }
   ).then((resp) => {
     if (!resp) return res.sendStatus(500);
-    console.log(resp.text())
 
-    resp.json().then((data) => {
+    resp.text().then((data) => {
       console.log(data)
       if (resp.status !== 200) return res.sendStatus(501);
       res.status(200).json(data.data);
