@@ -24,9 +24,11 @@ router.post("/products", function (req, res, next) {
       }
     }
   ).then((resp) => {
-    if (resp.status !== 200) return res.sendStatus(501);
+    if (!resp) return res.sendStatus(500);
 
     resp.json().then((data) => {
+      console.log(data)
+      if (resp.status !== 200) return res.sendStatus(501);
       res.status(200).json(data.data);
     });
   });
