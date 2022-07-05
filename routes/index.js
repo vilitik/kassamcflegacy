@@ -20,7 +20,8 @@ router.post("/products", function (req, res, next) {
         Accept: "*/*",
         Authorization:
           "Basic " +
-          Buffer.from(`${mcfInfo.user}:${mcfInfo.password}`).toString("base64")
+          Buffer.from(`${mcfInfo.user}:${mcfInfo.password}`).toString("base64"),
+        "User-Agent":"PostmanRuntime/7.29.2"
       }
     }
   ).then((resp) => {
