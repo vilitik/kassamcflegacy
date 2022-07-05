@@ -24,8 +24,8 @@ router.post("/products", function (req, res, next) {
       }
     }
   ).then((resp) => {
-    if (!resp) return res.sendStatus(500);
-    console.log(resp)
+    if (!resp.body) return res.sendStatus(500);
+    console.log(resp.body)
 
     resp.json().then((data) => {
       console.log(data)
